@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build pytest openbb-core httpx pydantic
+          python -m pip install -e .
+
+      - name: Run tests
+        run: python -m pytest tests -q
+
+      - name: Build wheel and sdist
+        run: python -m build
+
+      - name: Smoke install built package
+        run: |
+          python -m venv /tmp/openbb-adanos-smoke
+          /tmp/openbb-adanos-smoke/bin/pip install dist/openbb_adanos-*.whl
+          /tmp/openbb-adanos-smoke/bin/python - <<'PY'
+          from openbb_adanos import AdanosClient, __version__
+
+          assert __version__
+          client = AdanosClient(api_key="sk_live_example")
+          assert client.reddit is not None
+          assert client.news is not None
+          assert client.x is not None
+          assert client.polymarket is not None
+          client.close()
+          PY
