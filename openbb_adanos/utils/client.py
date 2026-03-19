@@ -283,12 +283,15 @@ class _PlatformNamespace:
         ticker = normalize_symbols([symbol], max_items=1)[0]
         return self._client.get_json(f"{self._platform.prefix}/stock/{ticker}/explain")
 
-    def search(self, query: str) -> dict[str, Any]:
+    def search(self, query: str, *, days: int = 7, limit: int = 20) -> dict[str, Any]:
         """Search stocks within a platform universe."""
         cleaned = str(query).strip()
         if not cleaned:
             raise ValueError("query must not be empty.")
-        return self._client.get_json(f"{self._platform.prefix}/search", params={"q": cleaned})
+        return self._client.get_json(
+            f"{self._platform.prefix}/search",
+            params={"q": cleaned, "days": validate_days(days), "limit": validate_limit(limit)},
+        )
 
     def compare(
         self,
@@ -448,10 +451,12 @@ def search_stocks(
     *,
     source: str,
     api_key: str,
+    days: int = 7,
+    limit: int = 20,
 ) -> dict[str, Any]:
     """Search stocks within one platform namespace."""
     with AdanosClient(api_key=api_key) as client:
-        return client.platform(source).search(query)
+        return client.platform(source).search(query, days=days, limit=limit)
 
 
 def get_stats(

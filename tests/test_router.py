@@ -16,13 +16,15 @@ def test_search_payload_is_normalized_for_dataframe_usage():
         {
             "query": "tesla",
             "count": 1,
-            "results": [{"ticker": "TSLA", "mention_count": 123}],
+            "period_days": 7,
+            "results": [{"ticker": "TSLA", "summary": {"mentions": 123}}],
         },
     )
 
-    assert obbject.results == [{"ticker": "TSLA", "mention_count": 123}]
+    assert obbject.results == [{"ticker": "TSLA", "summary": {"mentions": 123}}]
     assert obbject.extra["query"] == "tesla"
     assert obbject.extra["count"] == 1
+    assert obbject.extra["period_days"] == 7
 
 
 def test_compare_payload_is_normalized_for_dataframe_usage():

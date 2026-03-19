@@ -77,6 +77,19 @@ def test_compare_normalizes_symbol_lists():
     assert dict(requests[0].url.params) == {"tickers": "TSLA,NVDA", "days": "4"}
 
 
+def test_search_includes_days_and_limit():
+    requests = []
+    with AdanosClient(
+        api_key="sk_live_test",
+        transport=_transport(requests, {"query": "tesla", "count": 0, "period_days": 14, "results": []}),
+    ) as client:
+        payload = client.reddit.search("tesla", days=14, limit=5)
+
+    assert payload["period_days"] == 14
+    assert requests[0].url.path == "/reddit/stocks/v1/search"
+    assert dict(requests[0].url.params) == {"q": "tesla", "days": "14", "limit": "5"}
+
+
 def test_get_health_works_without_api_key():
     requests = []
     payload = {"status": "healthy"}

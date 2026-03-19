@@ -13,6 +13,7 @@ MOCK_STOCK_RESPONSE = {
     "found": True,
     "buzz_score": 72.5,
     "sentiment_score": 0.34,
+    "mentions": 412,
     "total_mentions": 412,
     "positive_count": 180,
     "negative_count": 54,
@@ -24,7 +25,7 @@ MOCK_STOCK_RESPONSE = {
     "total_upvotes": 15320,
     "subreddit_count": 8,
     "period_days": 7,
-    "daily_trend": [{"date": "2026-03-15", "mentions": 23, "sentiment": 0.4}],
+    "daily_trend": [{"date": "2026-03-15", "mentions": 23, "sentiment_score": 0.4, "sentiment": 0.4}],
 }
 
 MOCK_X_STOCK_RESPONSE = {
@@ -33,6 +34,7 @@ MOCK_X_STOCK_RESPONSE = {
     "found": True,
     "buzz_score": 68.1,
     "sentiment_score": 0.12,
+    "mentions": 125,
     "total_mentions": 125,
     "positive_count": 51,
     "negative_count": 22,
@@ -91,19 +93,31 @@ MOCK_COMPARE_RESPONSE = {
             "ticker": "AAPL",
             "company_name": "Apple Inc.",
             "buzz_score": 72.5,
+            "trend": "rising",
+            "sentiment_score": 0.34,
             "sentiment": 0.34,
             "mentions": 412,
+            "unique_posts": 89,
+            "subreddit_count": 8,
+            "bullish_pct": 61.2,
+            "bearish_pct": 18.4,
             "total_upvotes": 15320,
+            "trend_history": [41.0, 55.2, 72.5],
         },
         {
             "ticker": "NVDA",
             "company_name": "NVIDIA Corporation",
             "buzz_score": 58.2,
+            "trend": "stable",
+            "sentiment_score": 0.21,
             "sentiment": 0.21,
             "trade_count": 287,
             "market_count": 12,
             "unique_traders": 98,
+            "bullish_pct": 54.0,
+            "bearish_pct": 22.0,
             "total_liquidity": 9800.5,
+            "trend_history": [44.1, 49.2, 58.2],
         },
     ],
 }
@@ -152,15 +166,17 @@ class TestStockSentimentFetcher:
         item = result[0]
         assert item.symbol == "AAPL"
         assert item.buzz_score == 72.5
+        assert item.mentions == 412
         assert item.total_mentions == 412
         assert item.positive_count == 180
-        assert item.daily_trend == [{"date": "2026-03-15", "mentions": 23, "sentiment": 0.4}]
+        assert item.daily_trend == [{"date": "2026-03-15", "mentions": 23, "sentiment_score": 0.4, "sentiment": 0.4}]
 
     def test_transform_data_x_specific_fields(self):
         query = AdanosStockSentimentFetcher.transform_query({"symbol": "TSLA", "source": "x"})
         result = AdanosStockSentimentFetcher.transform_data(query, MOCK_X_STOCK_RESPONSE)
 
         item = result[0]
+        assert item.mentions == 125
         assert item.unique_posts == 42
         assert item.unique_tweets == 42
         assert item.is_validated is True
@@ -176,6 +192,7 @@ class TestStockSentimentFetcher:
         )
 
         item = result[0]
+        assert item.mentions == 91
         assert item.total_mentions == 91
         assert item.trade_count == 91
 
@@ -268,9 +285,13 @@ class TestCompareFetcher:
 
         assert len(result) == 2
         assert result[0].symbol == "AAPL"
+        assert result[0].trend == "rising"
         assert result[0].sentiment_score == 0.34
+        assert result[0].unique_posts == 89
+        assert result[0].trend_history == [41.0, 55.2, 72.5]
         assert result[1].mentions == 287
         assert result[1].total_upvotes is None
         assert result[1].trade_count == 287
         assert result[1].market_count == 12
         assert result[1].total_liquidity == 9800.5
+        assert result[1].trend_history == [44.1, 49.2, 58.2]

@@ -238,10 +238,12 @@ def _create_platform_router(
     )
     def search(
         query: str,
+        days: int = 7,
+        limit: int = 20,
     ) -> OBBject:
         """Search symbols by ticker, company name, or alias."""
         with _build_client(require_api_key=True) as client:
-            payload = client.platform(platform).search(query)
+            payload = client.platform(platform).search(query, days=days, limit=limit)
         return _to_obbject(platform, "search", payload)
 
     @platform_router.command(

@@ -37,13 +37,20 @@ class AdanosCompareData(Data):
     sentiment_score: Optional[float] = Field(
         default=None, description="Sentiment score (-1.0 bearish to +1.0 bullish)."
     )
+    trend: Optional[str] = Field(default=None, description="Trend direction: rising, falling, stable.")
     mentions: Optional[int] = Field(default=None, description="Total mentions in period.")
     total_upvotes: Optional[int] = Field(default=None, description="Total upvotes/likes/trades.")
     source_count: Optional[int] = Field(default=None, description="News source count.")
+    unique_posts: Optional[int] = Field(default=None, description="Distinct Reddit post count.")
+    subreddit_count: Optional[int] = Field(default=None, description="Distinct subreddit count.")
+    unique_tweets: Optional[int] = Field(default=None, description="Distinct X tweet count.")
+    bullish_pct: Optional[float] = Field(default=None, description="Percentage of bullish mentions.")
+    bearish_pct: Optional[float] = Field(default=None, description="Percentage of bearish mentions.")
     trade_count: Optional[int] = Field(default=None, description="Polymarket trade count.")
     market_count: Optional[int] = Field(default=None, description="Polymarket market count.")
     unique_traders: Optional[int] = Field(default=None, description="Best-effort trader count.")
     total_liquidity: Optional[float] = Field(default=None, description="Windowed Polymarket liquidity.")
+    trend_history: Optional[list[float]] = Field(default=None, description="Daily buzz history, oldest to newest.")
     source: Optional[str] = Field(
         default=None,
         description="Platform source (reddit, news, x, polymarket).",
@@ -91,6 +98,7 @@ class AdanosCompareFetcher(
                     company_name=item.get("company_name"),
                     buzz_score=item.get("buzz_score"),
                     sentiment_score=item.get("sentiment_score", item.get("sentiment")),
+                    trend=item.get("trend"),
                     mentions=(
                         item.get("mentions")
                         if item.get("mentions") is not None
@@ -98,10 +106,16 @@ class AdanosCompareFetcher(
                     ),
                     total_upvotes=item.get("total_upvotes"),
                     source_count=item.get("source_count"),
+                    unique_posts=item.get("unique_posts"),
+                    subreddit_count=item.get("subreddit_count"),
+                    unique_tweets=item.get("unique_tweets"),
+                    bullish_pct=item.get("bullish_pct"),
+                    bearish_pct=item.get("bearish_pct"),
                     trade_count=item.get("trade_count"),
                     market_count=item.get("market_count"),
                     unique_traders=item.get("unique_traders"),
                     total_liquidity=item.get("total_liquidity"),
+                    trend_history=item.get("trend_history"),
                     source=query.source,
                 )
             )
