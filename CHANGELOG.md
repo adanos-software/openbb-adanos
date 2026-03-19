@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0 - 2026-03-19
+
+- Updated compare models to the enriched `/compare` contract, including `trend`, `trend_history`, and platform-specific activity fields.
+- Updated search support to the current API `summary` contract with `days` and `limit`.
+- Updated stock detail handling to prefer canonical `mentions` while keeping compatibility with the legacy `total_mentions` alias.
+
 ## 1.1.0 - 2026-03-16
 
 - Added a full OpenBB core router surface under `obb.adanos.<platform>.*` for Reddit, News, X/Twitter, and Polymarket.
