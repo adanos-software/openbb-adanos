@@ -55,6 +55,7 @@ def _to_obbject(platform: str, route: str, payload: Any) -> OBBject:
                 {
                     "query": payload.get("query"),
                     "count": payload.get("count"),
+                    "period_days": payload.get("period_days"),
                 }
             )
         elif route == "compare":

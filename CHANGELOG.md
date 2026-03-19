@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1 - 2026-03-19
+
+- Fixed OpenBB search payload normalization so `period_days` remains available in router `extra` metadata.
+
 ## 1.2.0 - 2026-03-19
 
 - Updated compare models to the enriched `/compare` contract, including `trend`, `trend_history`, and platform-specific activity fields.
