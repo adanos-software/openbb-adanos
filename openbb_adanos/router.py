@@ -1,8 +1,6 @@
 """OpenBB router extension exposing the full Adanos platform surface."""
 
-from __future__ import annotations
-
-from typing import Any, Literal
+from typing import Any, Optional
 
 from openbb_core.app.model.obbject import OBBject
 from openbb_core.app.model.user_settings import UserSettings
@@ -86,8 +84,8 @@ def _create_platform_router(
             days: int = 1,
             limit: int = 20,
             offset: int = 0,
-            asset_type: Literal["stock", "etf", "all"] | None = None,
-            source: str | None = None,
+            asset_type: Optional[str] = None,
+            source: Optional[str] = None,
         ) -> OBBject:
             """Get trending stocks for one Adanos platform."""
             with _build_client(require_api_key=True) as client:
@@ -109,7 +107,7 @@ def _create_platform_router(
             days: int = 1,
             limit: int = 20,
             offset: int = 0,
-            source: str | None = None,
+            source: Optional[str] = None,
         ) -> OBBject:
             """Get sector-level trend aggregations for one Adanos platform."""
             with _build_client(require_api_key=True) as client:
@@ -130,7 +128,7 @@ def _create_platform_router(
             days: int = 1,
             limit: int = 20,
             offset: int = 0,
-            source: str | None = None,
+            source: Optional[str] = None,
         ) -> OBBject:
             """Get country-level trend aggregations for one Adanos platform."""
             with _build_client(require_api_key=True) as client:
@@ -153,7 +151,7 @@ def _create_platform_router(
             days: int = 1,
             limit: int = 20,
             offset: int = 0,
-            asset_type: Literal["stock", "etf", "all"] | None = None,
+            asset_type: Optional[str] = None,
         ) -> OBBject:
             """Get trending stocks for one Adanos platform."""
             with _build_client(require_api_key=True) as client:
@@ -253,10 +251,10 @@ def _create_platform_router(
         operation_id=f"{platform}_compare",
     )
     def compare(
-        symbols: str | list[str],
+        symbols: str,
         days: int = 7,
     ) -> OBBject:
-        """Compare up to 10 symbols side by side."""
+        """Compare up to 10 comma-separated symbols side by side."""
         with _build_client(require_api_key=True) as client:
             payload = client.platform(platform).compare(symbols, days=days)
         return _to_obbject(platform, "compare", payload)
