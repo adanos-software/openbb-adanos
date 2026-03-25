@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2 - 2026-03-25
+
+- Fixed OpenBB core router code generation so `obb.adanos.<platform>.*` routes build and run correctly in a clean local OpenBB install.
+
 ## 1.2.1 - 2026-03-19
 
 - Fixed OpenBB search payload normalization so `period_days` remains available in router `extra` metadata.
