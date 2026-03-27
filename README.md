@@ -1,5 +1,7 @@
 # openbb-adanos
 
+[![PyPI version](https://img.shields.io/pypi/v/openbb-adanos.svg)](https://pypi.org/project/openbb-adanos/)
+
 Adanos market-sentiment integration for the [OpenBB Platform](https://github.com/OpenBB-finance/OpenBB).
 
 The package now exposes two layers:
