@@ -1,4 +1,4 @@
-"""HTTP client utilities for the Adanos Stock Sentiment API."""
+"""HTTP client utilities for the Adanos Market Sentiment API."""
 
 from __future__ import annotations
 
@@ -307,6 +307,11 @@ class _PlatformNamespace:
         }
         return self._client.get_json(f"{self._platform.prefix}/compare", params=params)
 
+    def market_sentiment(self, *, days: int = 1) -> dict[str, Any]:
+        """Get the service-level market sentiment snapshot for a platform."""
+        params = {"days": validate_days(days)}
+        return self._client.get_json(f"{self._platform.prefix}/market-sentiment", params=params)
+
     def stats(self) -> dict[str, Any]:
         """Get dataset coverage stats for a platform."""
         return self._client.get_json(f"{self._platform.prefix}/stats")
@@ -416,6 +421,17 @@ def get_compare(
         return client.platform(source).compare(symbols, days=days)
 
 
+def get_market_sentiment(
+    *,
+    source: str,
+    api_key: str,
+    days: int = 1,
+) -> dict[str, Any]:
+    """Fetch the service-level market sentiment snapshot for one platform."""
+    with AdanosClient(api_key=api_key) as client:
+        return client.platform(source).market_sentiment(days=days)
+
+
 def get_trending_dimensions(
     *,
     source: str,
@@ -499,6 +515,7 @@ __all__ = [
     "get_base_url",
     "get_compare",
     "get_health",
+    "get_market_sentiment",
     "get_platform_definition",
     "get_stats",
     "get_stock_explanation",

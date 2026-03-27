@@ -1,6 +1,6 @@
 # openbb-adanos
 
-Adanos stock-sentiment integration for the [OpenBB Platform](https://github.com/OpenBB-finance/OpenBB).
+Adanos market-sentiment integration for the [OpenBB Platform](https://github.com/OpenBB-finance/OpenBB).
 
 The package now exposes two layers:
 
@@ -62,6 +62,7 @@ from openbb import obb
 # Reddit
 obb.adanos.reddit.trending(days=1, limit=25)
 obb.adanos.reddit.stock(symbol="TSLA", days=7)
+obb.adanos.reddit.market_sentiment(days=7)
 obb.adanos.reddit.explain(symbol="TSLA")
 obb.adanos.reddit.search(query="tesla")
 obb.adanos.reddit.compare(symbols=["TSLA", "NVDA", "AMD"])
@@ -73,16 +74,19 @@ obb.adanos.news.trending(days=3, source="reuters")
 obb.adanos.news.trending_sectors(days=7, source="bloomberg")
 obb.adanos.news.trending_countries(days=7)
 obb.adanos.news.stock(symbol="AAPL", days=14)
+obb.adanos.news.market_sentiment(days=7)
 obb.adanos.news.explain(symbol="AAPL")
 
 # X / Twitter
 obb.adanos.x.trending(days=1, asset_type="stock")
 obb.adanos.x.stock(symbol="TSLA", days=7)
+obb.adanos.x.market_sentiment(days=7)
 obb.adanos.x.search(query="nvidia")
 
 # Polymarket
 obb.adanos.polymarket.trending(days=7)
 obb.adanos.polymarket.stock(symbol="NVDA", days=14)
+obb.adanos.polymarket.market_sentiment(days=7)
 obb.adanos.polymarket.compare(symbols="NVDA,TSLA,AMD")
 ```
 
@@ -96,10 +100,10 @@ obb.adanos.polymarket.compare(symbols="NVDA,TSLA,AMD")
 
 ### Router commands
 
-- `obb.adanos.reddit.{trending,trending_sectors,trending_countries,stock,explain,search,compare,stats,health}`
-- `obb.adanos.news.{trending,trending_sectors,trending_countries,stock,explain,search,compare,stats,health}`
-- `obb.adanos.x.{trending,trending_sectors,trending_countries,stock,search,compare,stats,health}`
-- `obb.adanos.polymarket.{trending,trending_sectors,trending_countries,stock,search,compare,stats,health}`
+- `obb.adanos.reddit.{trending,trending_sectors,trending_countries,stock,market_sentiment,explain,search,compare,stats,health}`
+- `obb.adanos.news.{trending,trending_sectors,trending_countries,stock,market_sentiment,explain,search,compare,stats,health}`
+- `obb.adanos.x.{trending,trending_sectors,trending_countries,stock,market_sentiment,search,compare,stats,health}`
+- `obb.adanos.polymarket.{trending,trending_sectors,trending_countries,stock,market_sentiment,search,compare,stats,health}`
 
 ## Notes
 
