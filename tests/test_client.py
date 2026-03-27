@@ -90,6 +90,21 @@ def test_search_includes_days_and_limit():
     assert dict(requests[0].url.params) == {"q": "tesla", "days": "14", "limit": "5"}
 
 
+def test_market_sentiment_uses_service_endpoint():
+    requests = []
+    payload = {"buzz_score": 57.4, "drivers": [{"ticker": "SPY"}]}
+
+    with AdanosClient(
+        api_key="sk_live_test",
+        transport=_transport(requests, payload),
+    ) as client:
+        result = client.reddit.market_sentiment(days=7)
+
+    assert result["buzz_score"] == 57.4
+    assert requests[0].url.path == "/reddit/stocks/v1/market-sentiment"
+    assert dict(requests[0].url.params) == {"days": "7"}
+
+
 def test_get_health_works_without_api_key():
     requests = []
     payload = {"status": "healthy"}

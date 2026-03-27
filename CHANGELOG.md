@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0 - 2026-03-27
+
+- Added `market_sentiment(days=...)` to the OpenBB Adanos router and HTTP client for Reddit, News, X/Twitter, and Polymarket.
+- Renamed package metadata and docs from stock-sentiment wording to Adanos Market Sentiment branding.
+
 ## 1.2.2 - 2026-03-25
 
 - Fixed OpenBB core router code generation so `obb.adanos.<platform>.*` routes build and run correctly in a clean local OpenBB install.

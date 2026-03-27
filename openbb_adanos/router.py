@@ -261,6 +261,19 @@ def _create_platform_router(
 
     @platform_router.command(
         no_validate=True,
+        path="/market_sentiment",
+        operation_id=f"{platform}_market_sentiment",
+    )
+    def market_sentiment(
+        days: int = 1,
+    ) -> OBBject:
+        """Get the service-level market sentiment snapshot for one Adanos platform."""
+        with _build_client(require_api_key=True) as client:
+            payload = client.platform(platform).market_sentiment(days=days)
+        return _to_obbject(platform, "market_sentiment", payload)
+
+    @platform_router.command(
+        no_validate=True,
         path="/stats",
         operation_id=f"{platform}_stats",
     )

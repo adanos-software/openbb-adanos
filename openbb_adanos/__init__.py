@@ -1,4 +1,4 @@
-"""Adanos Stock Sentiment provider and router extensions for OpenBB."""
+"""Adanos Market Sentiment provider and router extensions for OpenBB."""
 
 from openbb_core.provider.abstract.provider import Provider
 
@@ -7,13 +7,13 @@ from openbb_adanos.models.stock_sentiment import AdanosStockSentimentFetcher
 from openbb_adanos.models.trending import AdanosTrendingFetcher
 from openbb_adanos.utils.client import AdanosClient
 
-__version__ = "1.2.2"
+__version__ = "1.3.0"
 
 adanos_provider = Provider(
     name="adanos",
-    description="Stock sentiment data from Reddit, X/Twitter, and Polymarket. "
-    "Provides buzz scores, sentiment analysis, trending stocks, sector/country aggregates, "
-    "search, platform health, and cross-platform comparison. "
+    description="Market sentiment data from Reddit, News, X/Twitter, and Polymarket. "
+    "Provides buzz scores, service-level market sentiment snapshots, trending stocks, "
+    "sector/country aggregates, search, platform health, and cross-platform comparison. "
     "Get a free API key at https://api.adanos.org",
     website="https://api.adanos.org",
     credentials=["api_key"],
