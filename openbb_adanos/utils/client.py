@@ -38,6 +38,7 @@ PLATFORMS = {
     "x": PlatformDefinition(
         name="x",
         prefix="/x/stocks/v1",
+        supports_explain=True,
     ),
     "polymarket": PlatformDefinition(
         name="polymarket",

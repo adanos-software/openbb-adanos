@@ -320,6 +320,7 @@ router.include_router(
     _create_platform_router(
         platform="x",
         description="X/Twitter stock sentiment endpoints.",
+        supports_explain=True,
     ),
     prefix="/x",
 )
