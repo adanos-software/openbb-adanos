@@ -83,6 +83,7 @@ obb.adanos.news.explain(symbol="AAPL")
 obb.adanos.x.trending(days=1, asset_type="stock")
 obb.adanos.x.stock(symbol="TSLA", days=7)
 obb.adanos.x.market_sentiment(days=7)
+obb.adanos.x.explain(symbol="TSLA")
 obb.adanos.x.search(query="nvidia")
 
 # Polymarket
@@ -104,7 +105,7 @@ obb.adanos.polymarket.compare(symbols="NVDA,TSLA,AMD")
 
 - `obb.adanos.reddit.{trending,trending_sectors,trending_countries,stock,market_sentiment,explain,search,compare,stats,health}`
 - `obb.adanos.news.{trending,trending_sectors,trending_countries,stock,market_sentiment,explain,search,compare,stats,health}`
-- `obb.adanos.x.{trending,trending_sectors,trending_countries,stock,market_sentiment,search,compare,stats,health}`
+- `obb.adanos.x.{trending,trending_sectors,trending_countries,stock,market_sentiment,explain,search,compare,stats,health}`
 - `obb.adanos.polymarket.{trending,trending_sectors,trending_countries,stock,market_sentiment,search,compare,stats,health}`
 
 ## Notes

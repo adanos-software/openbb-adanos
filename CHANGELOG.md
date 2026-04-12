@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.0 - 2026-04-12
+
+- Added X/Twitter stock explanation support to the HTTP client and OpenBB router as `client.x.explain(...)` and `obb.adanos.x.explain(...)`.
+
 ## 1.3.0 - 2026-03-27
 
 - Added `market_sentiment(days=...)` to the OpenBB Adanos router and HTTP client for Reddit, News, X/Twitter, and Polymarket.

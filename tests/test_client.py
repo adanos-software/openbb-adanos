@@ -55,13 +55,26 @@ def test_news_trending_supports_source_filter():
     assert dict(requests[0].url.params)["source"] == "reuters"
 
 
+def test_x_explain_builds_expected_request():
+    requests = []
+    with AdanosClient(
+        api_key="sk_live_test",
+        transport=_transport(requests, {"ticker": "TSLA", "explanation": "X context"}),
+    ) as client:
+        payload = client.x.explain("TSLA")
+
+    assert payload == {"ticker": "TSLA", "explanation": "X context"}
+    assert requests[0].url.path == "/x/stocks/v1/stock/TSLA/explain"
+    assert dict(requests[0].url.params) == {}
+
+
 def test_explain_validation_rejects_unsupported_platform():
     with AdanosClient(
         api_key="sk_live_test",
         transport=httpx.MockTransport(lambda request: httpx.Response(200)),
     ) as client:
         with pytest.raises(ValueError, match="does not provide /explain"):
-            client.x.explain("TSLA")
+            client.polymarket.explain("TSLA")
 
 
 def test_compare_normalizes_symbol_lists():

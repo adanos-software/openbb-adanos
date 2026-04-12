@@ -7,7 +7,7 @@ from openbb_adanos.models.stock_sentiment import AdanosStockSentimentFetcher
 from openbb_adanos.models.trending import AdanosTrendingFetcher
 from openbb_adanos.utils.client import AdanosClient
 
-__version__ = "1.3.0"
+__version__ = "1.4.0"
 
 adanos_provider = Provider(
     name="adanos",

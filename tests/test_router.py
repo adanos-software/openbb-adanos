@@ -9,6 +9,16 @@ def test_router_exposes_all_platform_namespaces():
     assert set(router.routers) == {"reddit", "news", "x", "polymarket"}
 
 
+def test_x_router_exposes_explain_without_polymarket_explain():
+    x_routes = {route.operation_id: route.path for route in router.routers["x"].api_router.routes}
+    polymarket_routes = {
+        route.operation_id: route.path for route in router.routers["polymarket"].api_router.routes
+    }
+
+    assert x_routes["x_explain"] == "/explain"
+    assert "polymarket_explain" not in polymarket_routes
+
+
 def test_search_payload_is_normalized_for_dataframe_usage():
     obbject = _to_obbject(
         "reddit",
