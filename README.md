@@ -8,6 +8,7 @@ The package now exposes two layers:
 
 - Standard OpenBB provider commands for quick cross-platform sentiment lookups.
 - A full `obb.adanos.<platform>.*` router surface for all Adanos stock endpoints.
+- An OpenBB Workspace app backend in `workspace_app/` for dashboards and widgets.
 
 Links:
 
@@ -32,6 +33,20 @@ obb.user.credentials.adanos_api_key = "sk_live_..."
 ```
 
 You can also use `OPENBB_ADANOS_API_KEY`.
+
+## OpenBB Workspace App
+
+The `workspace_app/` directory contains a FastAPI backend for OpenBB Workspace Data Connectors. It exposes `/widgets.json`, `/apps.json`, and Adanos sentiment endpoints for a ready-made dashboard.
+
+Run it locally from the repository root:
+
+```bash
+pip install -e .
+pip install -r workspace_app/requirements.txt
+uvicorn workspace_app.main:app --reload --host 0.0.0.0 --port 7779
+```
+
+Then add `http://localhost:7779` in OpenBB Workspace Data Connectors. For live data, add the custom connector header `X-API-Key: sk_live_...` or set `ADANOS_API_KEY` on the backend.
 
 ## Quick Start
 
