@@ -1,0 +1,225 @@
+{
+  "adanos_setup": {
+    "name": "Adanos Setup",
+    "description": "How to configure the optional Adanos API key for this OpenBB Workspace backend.",
+    "category": "Adanos Market Sentiment",
+    "type": "markdown",
+    "endpoint": "setup",
+    "gridData": { "w": 40, "h": 7 },
+    "source": "Adanos"
+  },
+  "adanos_market_sentiment": {
+    "name": "Market Sentiment Snapshot",
+    "description": "Market-level buzz and sentiment snapshot from one Adanos platform.",
+    "category": "Adanos Market Sentiment",
+    "type": "metric",
+    "endpoint": "market_sentiment",
+    "gridData": { "w": 16, "h": 6 },
+    "source": "Adanos",
+    "params": [
+      {
+        "paramName": "source",
+        "value": "reddit",
+        "label": "Source",
+        "type": "text",
+        "description": "Adanos data source.",
+        "options": [
+          { "label": "Reddit", "value": "reddit" },
+          { "label": "News", "value": "news" },
+          { "label": "X / Twitter", "value": "x" },
+          { "label": "Polymarket", "value": "polymarket" }
+        ]
+      },
+      {
+        "paramName": "days",
+        "value": 7,
+        "label": "Days",
+        "type": "number",
+        "description": "Lookback period from 1 to 90 days."
+      }
+    ]
+  },
+  "adanos_trending": {
+    "name": "Trending Sentiment",
+    "description": "Trending stocks, ETFs, or Polymarket symbols with buzz and sentiment fields.",
+    "category": "Adanos Market Sentiment",
+    "type": "table",
+    "endpoint": "trending",
+    "gridData": { "w": 40, "h": 16 },
+    "source": "Adanos",
+    "params": [
+      {
+        "paramName": "source",
+        "value": "reddit",
+        "label": "Source",
+        "type": "text",
+        "description": "Adanos data source.",
+        "options": [
+          { "label": "Reddit", "value": "reddit" },
+          { "label": "News", "value": "news" },
+          { "label": "X / Twitter", "value": "x" },
+          { "label": "Polymarket", "value": "polymarket" }
+        ]
+      },
+      {
+        "paramName": "days",
+        "value": 7,
+        "label": "Days",
+        "type": "number",
+        "description": "Lookback period from 1 to 90 days."
+      },
+      {
+        "paramName": "limit",
+        "value": 20,
+        "label": "Limit",
+        "type": "number",
+        "description": "Maximum rows from 1 to 100."
+      },
+      {
+        "paramName": "asset_type",
+        "value": "stock",
+        "label": "Asset Type",
+        "type": "text",
+        "description": "Asset filter for trending results.",
+        "options": [
+          { "label": "Stocks", "value": "stock" },
+          { "label": "ETFs", "value": "etf" },
+          { "label": "All", "value": "all" }
+        ]
+      }
+    ],
+    "columnsDefs": [
+      {
+        "field": "symbol",
+        "headerName": "Symbol",
+        "cellDataType": "text",
+        "chartDataType": "category",
+        "renderFn": "cellOnClick",
+        "renderFnParams": {
+          "actionType": "groupBy",
+          "groupBy": { "paramName": "symbol" }
+        },
+        "pinned": "left",
+        "width": 110
+      },
+      { "field": "company_name", "headerName": "Company", "cellDataType": "text", "chartDataType": "excluded", "width": 220 },
+      { "field": "source", "headerName": "Source", "cellDataType": "text", "chartDataType": "category", "width": 120 },
+      { "field": "buzz_score", "headerName": "Buzz", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 110 },
+      { "field": "sentiment_score", "headerName": "Sentiment", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 3, "renderFn": "greenRed", "width": 125 },
+      { "field": "mentions", "headerName": "Mentions", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 120 },
+      { "field": "trend", "headerName": "Trend", "cellDataType": "text", "chartDataType": "category", "renderFn": "titleCase", "width": 110 },
+      { "field": "bullish_pct", "headerName": "Bullish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
+      { "field": "bearish_pct", "headerName": "Bearish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
+      { "field": "unique_posts", "headerName": "Unique Posts", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 135 },
+      { "field": "total_upvotes", "headerName": "Upvotes/Likes", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 145 },
+      { "field": "trade_count", "headerName": "Trades", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 110 },
+      { "field": "market_count", "headerName": "Markets", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 110 },
+      { "field": "total_liquidity", "headerName": "Liquidity", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "width": 120 }
+    ]
+  },
+  "adanos_stock_sentiment": {
+    "name": "Selected Symbol Sentiment",
+    "description": "Detailed sentiment row for a single selected ticker.",
+    "category": "Adanos Market Sentiment",
+    "type": "table",
+    "endpoint": "stock_sentiment",
+    "gridData": { "w": 24, "h": 6 },
+    "source": "Adanos",
+    "params": [
+      {
+        "paramName": "symbol",
+        "value": "AAPL",
+        "label": "Symbol",
+        "type": "text",
+        "description": "Ticker symbol."
+      },
+      {
+        "paramName": "source",
+        "value": "reddit",
+        "label": "Source",
+        "type": "text",
+        "description": "Adanos data source.",
+        "options": [
+          { "label": "Reddit", "value": "reddit" },
+          { "label": "News", "value": "news" },
+          { "label": "X / Twitter", "value": "x" },
+          { "label": "Polymarket", "value": "polymarket" }
+        ]
+      },
+      {
+        "paramName": "days",
+        "value": 7,
+        "label": "Days",
+        "type": "number",
+        "description": "Lookback period from 1 to 90 days."
+      }
+    ],
+    "columnsDefs": [
+      { "field": "symbol", "headerName": "Symbol", "cellDataType": "text", "chartDataType": "category", "pinned": "left", "width": 110 },
+      { "field": "company_name", "headerName": "Company", "cellDataType": "text", "chartDataType": "excluded", "width": 220 },
+      { "field": "buzz_score", "headerName": "Buzz", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 110 },
+      { "field": "sentiment_score", "headerName": "Sentiment", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 3, "renderFn": "greenRed", "width": 125 },
+      { "field": "mentions", "headerName": "Mentions", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 120 },
+      { "field": "trend", "headerName": "Trend", "cellDataType": "text", "chartDataType": "category", "renderFn": "titleCase", "width": 110 },
+      { "field": "bullish_pct", "headerName": "Bullish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
+      { "field": "bearish_pct", "headerName": "Bearish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
+      { "field": "unique_posts", "headerName": "Unique Posts", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 135 },
+      { "field": "trade_count", "headerName": "Trades", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 110 },
+      { "field": "market_count", "headerName": "Markets", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 110 },
+      { "field": "total_liquidity", "headerName": "Liquidity", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "width": 120 }
+    ]
+  },
+  "adanos_compare": {
+    "name": "Symbol Sentiment Compare",
+    "description": "Compare up to 10 symbols side by side across Adanos platforms.",
+    "category": "Adanos Market Sentiment",
+    "type": "table",
+    "endpoint": "compare",
+    "gridData": { "w": 40, "h": 16 },
+    "source": "Adanos",
+    "params": [
+      {
+        "paramName": "symbols",
+        "value": "AAPL,MSFT,NVDA",
+        "label": "Symbols",
+        "type": "text",
+        "description": "Comma-separated ticker symbols, maximum 10."
+      },
+      {
+        "paramName": "source",
+        "value": "reddit",
+        "label": "Source",
+        "type": "text",
+        "description": "Adanos data source.",
+        "options": [
+          { "label": "Reddit", "value": "reddit" },
+          { "label": "News", "value": "news" },
+          { "label": "X / Twitter", "value": "x" },
+          { "label": "Polymarket", "value": "polymarket" }
+        ]
+      },
+      {
+        "paramName": "days",
+        "value": 7,
+        "label": "Days",
+        "type": "number",
+        "description": "Lookback period from 1 to 90 days."
+      }
+    ],
+    "columnsDefs": [
+      { "field": "symbol", "headerName": "Symbol", "cellDataType": "text", "chartDataType": "category", "pinned": "left", "width": 110 },
+      { "field": "company_name", "headerName": "Company", "cellDataType": "text", "chartDataType": "excluded", "width": 220 },
+      { "field": "source", "headerName": "Source", "cellDataType": "text", "chartDataType": "category", "width": 120 },
+      { "field": "buzz_score", "headerName": "Buzz", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 110 },
+      { "field": "sentiment_score", "headerName": "Sentiment", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 3, "renderFn": "greenRed", "width": 125 },
+      { "field": "mentions", "headerName": "Mentions", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 120 },
+      { "field": "trend", "headerName": "Trend", "cellDataType": "text", "chartDataType": "category", "renderFn": "titleCase", "width": 110 },
+      { "field": "bullish_pct", "headerName": "Bullish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
+      { "field": "bearish_pct", "headerName": "Bearish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
+      { "field": "unique_posts", "headerName": "Unique Posts", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 135 },
+      { "field": "trade_count", "headerName": "Trades", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 110 },
+      { "field": "market_count", "headerName": "Markets", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 110 },
+      { "field": "total_liquidity", "headerName": "Liquidity", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "width": 120 }
+    ]
+  }
+}

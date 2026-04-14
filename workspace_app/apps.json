@@ -1,0 +1,95 @@
+[
+  {
+    "name": "Adanos Market Sentiment",
+    "img": "",
+    "img_dark": "",
+    "img_light": "",
+    "description": "Cross-platform market sentiment dashboard for Reddit, News, X/Twitter, and Polymarket data from Adanos.",
+    "allowCustomization": true,
+    "tabs": {
+      "overview": {
+        "id": "overview",
+        "name": "Overview",
+        "layout": [
+          { "i": "adanos_setup", "x": 0, "y": 0, "w": 40, "h": 7 },
+          {
+            "i": "adanos_market_sentiment",
+            "x": 0,
+            "y": 7,
+            "w": 16,
+            "h": 6,
+            "groups": ["Group 2", "Group 3"],
+            "state": { "params": { "source": "reddit", "days": 7 } }
+          },
+          {
+            "i": "adanos_stock_sentiment",
+            "x": 16,
+            "y": 7,
+            "w": 24,
+            "h": 6,
+            "groups": ["Group 1", "Group 2", "Group 3"],
+            "state": { "params": { "symbol": "AAPL", "source": "reddit", "days": 7 } }
+          },
+          {
+            "i": "adanos_trending",
+            "x": 0,
+            "y": 13,
+            "w": 40,
+            "h": 16,
+            "groups": ["Group 1", "Group 2", "Group 3"],
+            "state": {
+              "params": { "source": "reddit", "days": 7, "limit": 20, "asset_type": "stock" },
+              "chartView": { "enabled": false, "chartType": "bar" }
+            }
+          }
+        ]
+      },
+      "compare": {
+        "id": "compare",
+        "name": "Compare",
+        "layout": [
+          {
+            "i": "adanos_compare",
+            "x": 0,
+            "y": 0,
+            "w": 40,
+            "h": 16,
+            "groups": ["Group 2", "Group 3"],
+            "state": {
+              "params": { "symbols": "AAPL,MSFT,NVDA", "source": "reddit", "days": 7 },
+              "chartView": { "enabled": true, "chartType": "bar" }
+            }
+          }
+        ]
+      }
+    },
+    "groups": [
+      {
+        "name": "Group 1",
+        "type": "param",
+        "paramName": "symbol",
+        "defaultValue": "AAPL",
+        "widgetIds": ["adanos_trending", "adanos_stock_sentiment"]
+      },
+      {
+        "name": "Group 2",
+        "type": "param",
+        "paramName": "source",
+        "defaultValue": "reddit",
+        "widgetIds": ["adanos_market_sentiment", "adanos_trending", "adanos_stock_sentiment", "adanos_compare"]
+      },
+      {
+        "name": "Group 3",
+        "type": "param",
+        "paramName": "days",
+        "defaultValue": 7,
+        "widgetIds": ["adanos_market_sentiment", "adanos_trending", "adanos_stock_sentiment", "adanos_compare"]
+      }
+    ],
+    "prompts": [
+      "Which stocks have the strongest positive sentiment and highest buzz in this Adanos dashboard?",
+      "Compare the selected Adanos sentiment source against Polymarket market activity for the same symbols.",
+      "Identify sentiment divergences between buzz score, bullish percentage, and mention or trade count."
+    ]
+  }
+]
