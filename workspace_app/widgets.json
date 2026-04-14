@@ -88,34 +88,33 @@
         ]
       }
     ],
-    "columnsDefs": [
-      {
-        "field": "symbol",
-        "headerName": "Symbol",
-        "cellDataType": "text",
-        "chartDataType": "category",
-        "renderFn": "cellOnClick",
-        "renderFnParams": {
-          "actionType": "groupBy",
-          "groupBy": { "paramName": "symbol" }
-        },
-        "pinned": "left",
-        "width": 110
-      },
-      { "field": "company_name", "headerName": "Company", "cellDataType": "text", "chartDataType": "excluded", "width": 220 },
-      { "field": "source", "headerName": "Source", "cellDataType": "text", "chartDataType": "category", "width": 120 },
-      { "field": "buzz_score", "headerName": "Buzz", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 110 },
-      { "field": "sentiment_score", "headerName": "Sentiment", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 3, "renderFn": "greenRed", "width": 125 },
-      { "field": "mentions", "headerName": "Mentions", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 120 },
-      { "field": "trend", "headerName": "Trend", "cellDataType": "text", "chartDataType": "category", "renderFn": "titleCase", "width": 110 },
-      { "field": "bullish_pct", "headerName": "Bullish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
-      { "field": "bearish_pct", "headerName": "Bearish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
-      { "field": "unique_posts", "headerName": "Unique Posts", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 135 },
-      { "field": "total_upvotes", "headerName": "Upvotes/Likes", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 145 },
-      { "field": "trade_count", "headerName": "Trades", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 110 },
-      { "field": "market_count", "headerName": "Markets", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 110 },
-      { "field": "total_liquidity", "headerName": "Liquidity", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "width": 120 }
-    ]
+    "data": {
+      "table": {
+        "columnsDefs": [
+          {
+            "field": "symbol",
+            "headerName": "Symbol",
+            "cellDataType": "text",
+            "chartDataType": "category",
+            "renderFn": "cellOnClick",
+            "renderFnParams": {
+              "actionType": "groupBy",
+              "groupBy": { "paramName": "symbol" }
+            },
+            "pinned": "left",
+            "width": 110
+          },
+          { "field": "company_name", "headerName": "Company", "cellDataType": "text", "chartDataType": "excluded", "width": 220 },
+          { "field": "source", "headerName": "Source", "cellDataType": "text", "chartDataType": "category", "width": 120 },
+          { "field": "buzz_score", "headerName": "Buzz", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 110 },
+          { "field": "sentiment_score", "headerName": "Sentiment", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 3, "renderFn": "greenRed", "width": 125 },
+          { "field": "mentions", "headerName": "Mentions", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 120 },
+          { "field": "trend", "headerName": "Trend", "cellDataType": "text", "chartDataType": "category", "renderFn": "titleCase", "width": 110 },
+          { "field": "bullish_pct", "headerName": "Bullish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
+          { "field": "bearish_pct", "headerName": "Bearish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 }
+        ]
+      }
+    }
   },
   "adanos_stock_sentiment": {
     "name": "Selected Symbol Sentiment",
@@ -154,20 +153,20 @@
         "description": "Lookback period from 1 to 90 days."
       }
     ],
-    "columnsDefs": [
-      { "field": "symbol", "headerName": "Symbol", "cellDataType": "text", "chartDataType": "category", "pinned": "left", "width": 110 },
-      { "field": "company_name", "headerName": "Company", "cellDataType": "text", "chartDataType": "excluded", "width": 220 },
-      { "field": "buzz_score", "headerName": "Buzz", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 110 },
-      { "field": "sentiment_score", "headerName": "Sentiment", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 3, "renderFn": "greenRed", "width": 125 },
-      { "field": "mentions", "headerName": "Mentions", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 120 },
-      { "field": "trend", "headerName": "Trend", "cellDataType": "text", "chartDataType": "category", "renderFn": "titleCase", "width": 110 },
-      { "field": "bullish_pct", "headerName": "Bullish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
-      { "field": "bearish_pct", "headerName": "Bearish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
-      { "field": "unique_posts", "headerName": "Unique Posts", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 135 },
-      { "field": "trade_count", "headerName": "Trades", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 110 },
-      { "field": "market_count", "headerName": "Markets", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 110 },
-      { "field": "total_liquidity", "headerName": "Liquidity", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "width": 120 }
-    ]
+    "data": {
+      "table": {
+        "columnsDefs": [
+          { "field": "symbol", "headerName": "Symbol", "cellDataType": "text", "chartDataType": "category", "pinned": "left", "width": 110 },
+          { "field": "company_name", "headerName": "Company", "cellDataType": "text", "chartDataType": "excluded", "width": 220 },
+          { "field": "buzz_score", "headerName": "Buzz", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 110 },
+          { "field": "sentiment_score", "headerName": "Sentiment", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 3, "renderFn": "greenRed", "width": 125 },
+          { "field": "mentions", "headerName": "Mentions", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 120 },
+          { "field": "trend", "headerName": "Trend", "cellDataType": "text", "chartDataType": "category", "renderFn": "titleCase", "width": 110 },
+          { "field": "bullish_pct", "headerName": "Bullish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
+          { "field": "bearish_pct", "headerName": "Bearish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 }
+        ]
+      }
+    }
   },
   "adanos_compare": {
     "name": "Symbol Sentiment Compare",
@@ -206,20 +205,20 @@
         "description": "Lookback period from 1 to 90 days."
       }
     ],
-    "columnsDefs": [
-      { "field": "symbol", "headerName": "Symbol", "cellDataType": "text", "chartDataType": "category", "pinned": "left", "width": 110 },
-      { "field": "company_name", "headerName": "Company", "cellDataType": "text", "chartDataType": "excluded", "width": 220 },
-      { "field": "source", "headerName": "Source", "cellDataType": "text", "chartDataType": "category", "width": 120 },
-      { "field": "buzz_score", "headerName": "Buzz", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 110 },
-      { "field": "sentiment_score", "headerName": "Sentiment", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 3, "renderFn": "greenRed", "width": 125 },
-      { "field": "mentions", "headerName": "Mentions", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 120 },
-      { "field": "trend", "headerName": "Trend", "cellDataType": "text", "chartDataType": "category", "renderFn": "titleCase", "width": 110 },
-      { "field": "bullish_pct", "headerName": "Bullish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
-      { "field": "bearish_pct", "headerName": "Bearish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
-      { "field": "unique_posts", "headerName": "Unique Posts", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 135 },
-      { "field": "trade_count", "headerName": "Trades", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 110 },
-      { "field": "market_count", "headerName": "Markets", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 110 },
-      { "field": "total_liquidity", "headerName": "Liquidity", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "width": 120 }
-    ]
+    "data": {
+      "table": {
+        "columnsDefs": [
+          { "field": "symbol", "headerName": "Symbol", "cellDataType": "text", "chartDataType": "category", "pinned": "left", "width": 110 },
+          { "field": "company_name", "headerName": "Company", "cellDataType": "text", "chartDataType": "excluded", "width": 220 },
+          { "field": "source", "headerName": "Source", "cellDataType": "text", "chartDataType": "category", "width": 120 },
+          { "field": "buzz_score", "headerName": "Buzz", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 110 },
+          { "field": "sentiment_score", "headerName": "Sentiment", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 3, "renderFn": "greenRed", "width": 125 },
+          { "field": "mentions", "headerName": "Mentions", "cellDataType": "number", "chartDataType": "series", "formatterFn": "int", "width": 120 },
+          { "field": "trend", "headerName": "Trend", "cellDataType": "text", "chartDataType": "category", "renderFn": "titleCase", "width": 110 },
+          { "field": "bullish_pct", "headerName": "Bullish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 },
+          { "field": "bearish_pct", "headerName": "Bearish %", "cellDataType": "number", "chartDataType": "series", "formatterFn": "none", "decimalPlaces": 2, "renderFn": "greenRed", "width": 120 }
+        ]
+      }
+    }
   }
 }

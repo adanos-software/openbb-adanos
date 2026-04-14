@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "openbb-adanos"
-version = "1.4.0"
+version = "1.4.1"
 description = "Market sentiment data from Reddit, News, X/Twitter, and Polymarket for OpenBB"
 authors = ["Alex Schneider"]
 license = "MIT"

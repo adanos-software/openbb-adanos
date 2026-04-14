@@ -96,6 +96,32 @@ def test_metadata_endpoints_use_openbb_shapes(monkeypatch):
 
     assert isinstance(widgets, dict)
     assert {"adanos_setup", "adanos_trending", "adanos_compare"} <= set(widgets)
+    for widget_id in ("adanos_trending", "adanos_stock_sentiment", "adanos_compare"):
+        assert "columnsDefs" not in widgets[widget_id]
+        fields = {
+            column["field"] for column in widgets[widget_id]["data"]["table"]["columnsDefs"]
+        }
+        assert fields <= {
+            "symbol",
+            "company_name",
+            "source",
+            "buzz_score",
+            "sentiment_score",
+            "mentions",
+            "trend",
+            "bullish_pct",
+            "bearish_pct",
+        }
+        assert not {
+            "total_upvotes",
+            "unique_posts",
+            "subreddit_count",
+            "source_count",
+            "trade_count",
+            "market_count",
+            "unique_traders",
+            "total_liquidity",
+        } & fields
     assert isinstance(apps, list)
     assert apps[0]["allowCustomization"] is True
     assert apps[0]["groups"][0]["name"] == "Group 1"
@@ -148,14 +174,6 @@ def test_trending_uses_openbb_header_and_maps_rows(monkeypatch):
         "trend": "rising",
         "bullish_pct": 71.0,
         "bearish_pct": 12.3,
-        "total_upvotes": None,
-        "unique_posts": 203,
-        "subreddit_count": None,
-        "source_count": None,
-        "trade_count": None,
-        "market_count": None,
-        "unique_traders": None,
-        "total_liquidity": None,
     }
 
 
@@ -221,6 +239,7 @@ def test_stock_and_compare_endpoints_normalize_rows(monkeypatch):
     assert ("stock", "AAPL", {"days": 14}) in dummy_client.calls
     assert compare.status_code == 200
     assert [row["symbol"] for row in compare.json()] == ["AAPL", "MSFT"]
+    assert "trade_count" not in compare.json()[1]
     assert ("compare", ["AAPL", "MSFT"], {"days": 7}) in dummy_client.calls
 
 
