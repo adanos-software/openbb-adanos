@@ -84,6 +84,11 @@ def _clear_api_key_env(monkeypatch) -> None:
 
 def test_metadata_endpoints_use_openbb_shapes(monkeypatch):
     _clear_api_key_env(monkeypatch)
+
+    def fail_if_metadata_is_reloaded(_filename):
+        raise AssertionError("metadata should be served from module cache")
+
+    monkeypatch.setattr(workspace_main, "_load_json_file", fail_if_metadata_is_reloaded)
     client = TestClient(workspace_main.app)
 
     widgets = client.get("/widgets.json").json()

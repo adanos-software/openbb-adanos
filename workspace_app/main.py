@@ -9,7 +9,7 @@ from typing import Any
 import httpx
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, PlainTextResponse
+from fastapi.responses import PlainTextResponse
 
 from openbb_adanos.utils.client import (
     API_KEY_ENV_VARS,
@@ -49,6 +49,10 @@ app.add_middleware(
 def _load_json_file(filename: str) -> Any:
     with (APP_DIR / filename).open(encoding="utf-8") as file:
         return json.load(file)
+
+
+WIDGETS_METADATA = _load_json_file("widgets.json")
+APPS_METADATA = _load_json_file("apps.json")
 
 
 def _request_api_key(request: Request) -> str | None:
@@ -188,15 +192,15 @@ def root() -> dict[str, Any]:
 
 
 @app.get("/widgets.json")
-def get_widgets() -> JSONResponse:
+def get_widgets() -> Any:
     """Return OpenBB Workspace widget metadata."""
-    return JSONResponse(content=_load_json_file("widgets.json"))
+    return WIDGETS_METADATA
 
 
 @app.get("/apps.json")
-def get_apps() -> JSONResponse:
+def get_apps() -> Any:
     """Return OpenBB Workspace app layout metadata."""
-    return JSONResponse(content=_load_json_file("apps.json"))
+    return APPS_METADATA
 
 
 @app.get("/setup", response_class=PlainTextResponse)
