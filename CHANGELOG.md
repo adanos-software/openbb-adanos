@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.1 - 2026-04-14
+
+- Fixed OpenBB Workspace widget metadata so table column definitions use the expected `data.table.columnsDefs` shape and avoid sparse source-specific columns in shared sentiment tables.
+
 ## 1.4.0 - 2026-04-12
 
 - Added X/Twitter stock explanation support to the HTTP client and OpenBB router as `client.x.explain(...)` and `obb.adanos.x.explain(...)`.

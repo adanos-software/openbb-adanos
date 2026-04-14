@@ -113,7 +113,6 @@ def _mentions(item: dict[str, Any]) -> int | None:
 def _sentiment_row(item: dict[str, Any], *, source: str, days: int) -> dict[str, Any]:
     symbol = item.get("ticker") or item.get("symbol") or ""
     sentiment_score = _first_present(item.get("sentiment_score"), item.get("sentiment"))
-    unique_posts = _first_present(item.get("unique_posts"), item.get("unique_tweets"))
     return {
         "symbol": str(symbol).upper(),
         "company_name": item.get("company_name"),
@@ -125,14 +124,6 @@ def _sentiment_row(item: dict[str, Any], *, source: str, days: int) -> dict[str,
         "trend": item.get("trend"),
         "bullish_pct": _safe_float(item.get("bullish_pct")),
         "bearish_pct": _safe_float(item.get("bearish_pct")),
-        "total_upvotes": _safe_int(item.get("total_upvotes")),
-        "unique_posts": _safe_int(unique_posts),
-        "subreddit_count": _safe_int(item.get("subreddit_count")),
-        "source_count": _safe_int(item.get("source_count")),
-        "trade_count": _safe_int(item.get("trade_count")),
-        "market_count": _safe_int(item.get("market_count")),
-        "unique_traders": _safe_int(item.get("unique_traders")),
-        "total_liquidity": _safe_float(item.get("total_liquidity")),
     }
 
 
