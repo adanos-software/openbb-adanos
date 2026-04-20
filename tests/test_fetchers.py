@@ -14,7 +14,6 @@ MOCK_STOCK_RESPONSE = {
     "buzz_score": 72.5,
     "sentiment_score": 0.34,
     "mentions": 412,
-    "total_mentions": 412,
     "positive_count": 180,
     "negative_count": 54,
     "neutral_count": 178,
@@ -25,7 +24,7 @@ MOCK_STOCK_RESPONSE = {
     "total_upvotes": 15320,
     "subreddit_count": 8,
     "period_days": 7,
-    "daily_trend": [{"date": "2026-03-15", "mentions": 23, "sentiment_score": 0.4, "sentiment": 0.4}],
+    "daily_trend": [{"date": "2026-03-15", "mentions": 23, "sentiment_score": 0.4}],
 }
 
 MOCK_X_STOCK_RESPONSE = {
@@ -35,7 +34,6 @@ MOCK_X_STOCK_RESPONSE = {
     "buzz_score": 68.1,
     "sentiment_score": 0.12,
     "mentions": 125,
-    "total_mentions": 125,
     "positive_count": 51,
     "negative_count": 22,
     "neutral_count": 52,
@@ -95,7 +93,6 @@ MOCK_COMPARE_RESPONSE = {
             "buzz_score": 72.5,
             "trend": "rising",
             "sentiment_score": 0.34,
-            "sentiment": 0.34,
             "mentions": 412,
             "unique_posts": 89,
             "subreddit_count": 8,
@@ -110,7 +107,6 @@ MOCK_COMPARE_RESPONSE = {
             "buzz_score": 58.2,
             "trend": "stable",
             "sentiment_score": 0.21,
-            "sentiment": 0.21,
             "trade_count": 287,
             "market_count": 12,
             "unique_traders": 98,
@@ -167,9 +163,8 @@ class TestStockSentimentFetcher:
         assert item.symbol == "AAPL"
         assert item.buzz_score == 72.5
         assert item.mentions == 412
-        assert item.total_mentions == 412
         assert item.positive_count == 180
-        assert item.daily_trend == [{"date": "2026-03-15", "mentions": 23, "sentiment_score": 0.4, "sentiment": 0.4}]
+        assert item.daily_trend == [{"date": "2026-03-15", "mentions": 23, "sentiment_score": 0.4}]
 
     def test_transform_data_x_specific_fields(self):
         query = AdanosStockSentimentFetcher.transform_query({"symbol": "TSLA", "source": "x"})
@@ -182,7 +177,7 @@ class TestStockSentimentFetcher:
         assert item.is_validated is True
         assert item.top_tweets == [{"author": "trader", "likes": 300}]
 
-    def test_transform_data_polymarket_backfills_total_mentions_from_trade_count(self):
+    def test_transform_data_polymarket_uses_trade_count_as_mentions(self):
         query = AdanosStockSentimentFetcher.transform_query(
             {"symbol": "NVDA", "source": "polymarket"}
         )
@@ -193,7 +188,6 @@ class TestStockSentimentFetcher:
 
         item = result[0]
         assert item.mentions == 91
-        assert item.total_mentions == 91
         assert item.trade_count == 91
 
     def test_transform_data_not_found(self):
