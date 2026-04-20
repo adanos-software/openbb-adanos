@@ -37,7 +37,6 @@ class AdanosStockSentimentData(Data):
         default=None, description="Sentiment score (-1.0 bearish to +1.0 bullish)."
     )
     mentions: Optional[int] = Field(default=None, description="Canonical mentions/trade volume in period.")
-    total_mentions: Optional[int] = Field(default=None, description="Total mentions in period.")
     positive_count: Optional[int] = Field(default=None, description="Positive mentions or markets.")
     negative_count: Optional[int] = Field(default=None, description="Negative mentions or markets.")
     neutral_count: Optional[int] = Field(default=None, description="Neutral mentions or markets.")
@@ -115,11 +114,7 @@ class AdanosStockSentimentFetcher(
         if not data or not data.get("found", True):
             return []
 
-        mentions = (
-            data.get("mentions")
-            if data.get("mentions") is not None
-            else data.get("total_mentions")
-        )
+        mentions = data.get("mentions")
         if mentions is None:
             mentions = data.get("trade_count")
 
@@ -131,7 +126,6 @@ class AdanosStockSentimentFetcher(
                 buzz_score=data.get("buzz_score"),
                 sentiment_score=data.get("sentiment_score"),
                 mentions=mentions,
-                total_mentions=mentions,
                 positive_count=data.get("positive_count"),
                 negative_count=data.get("negative_count"),
                 neutral_count=data.get("neutral_count"),

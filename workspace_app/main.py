@@ -104,7 +104,6 @@ def _mentions(item: dict[str, Any]) -> int | None:
     return _safe_int(
         _first_present(
             item.get("mentions"),
-            item.get("total_mentions"),
             item.get("trade_count"),
         )
     )
@@ -112,14 +111,13 @@ def _mentions(item: dict[str, Any]) -> int | None:
 
 def _sentiment_row(item: dict[str, Any], *, source: str, days: int) -> dict[str, Any]:
     symbol = item.get("ticker") or item.get("symbol") or ""
-    sentiment_score = _first_present(item.get("sentiment_score"), item.get("sentiment"))
     return {
         "symbol": str(symbol).upper(),
         "company_name": item.get("company_name"),
         "source": source,
         "days": days,
         "buzz_score": _safe_float(item.get("buzz_score")),
-        "sentiment_score": _safe_float(sentiment_score),
+        "sentiment_score": _safe_float(item.get("sentiment_score")),
         "mentions": _mentions(item),
         "trend": item.get("trend"),
         "bullish_pct": _safe_float(item.get("bullish_pct")),
@@ -242,9 +240,7 @@ def market_sentiment(
         },
         {
             "label": "Sentiment score",
-            "value": _display_value(
-                _first_present(payload.get("sentiment_score"), payload.get("sentiment"))
-            ),
+            "value": _display_value(payload.get("sentiment_score")),
             "subvalue": "-1 bearish to +1 bullish",
         },
         {

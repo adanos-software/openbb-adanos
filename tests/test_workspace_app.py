@@ -63,7 +63,7 @@ class DummyAdanosClient:
             "found": True,
             "buzz_score": 64.2,
             "sentiment_score": 0.18,
-            "total_mentions": 412,
+            "mentions": 412,
             "trend": "stable",
         }
 

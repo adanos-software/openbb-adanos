@@ -97,7 +97,7 @@ class AdanosCompareFetcher(
                     symbol=item.get("ticker", ""),
                     company_name=item.get("company_name"),
                     buzz_score=item.get("buzz_score"),
-                    sentiment_score=item.get("sentiment_score", item.get("sentiment")),
+                    sentiment_score=item.get("sentiment_score"),
                     trend=item.get("trend"),
                     mentions=(
                         item.get("mentions")

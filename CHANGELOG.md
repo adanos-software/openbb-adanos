@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0 - 2026-04-20
+
+- Removed OpenBB detail model exposure of the API `total_mentions` alias removed in API `1.25.0`; use `mentions`.
+- Updated compare and workspace widget transforms to use canonical `sentiment_score` instead of the removed `sentiment` alias.
+
 ## 1.4.1 - 2026-04-14
 
 - Fixed OpenBB Workspace widget metadata so table column definitions use the expected `data.table.columnsDefs` shape and avoid sparse source-specific columns in shared sentiment tables.
