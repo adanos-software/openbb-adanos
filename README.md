@@ -38,6 +38,21 @@ You can also use `OPENBB_ADANOS_API_KEY`.
 
 The `workspace_app/` directory contains a FastAPI backend for OpenBB Workspace Data Connectors. It exposes `/widgets.json`, `/apps.json`, and Adanos sentiment endpoints for a ready-made dashboard.
 
+For OpenBB Marketplace review, deploy this backend to a public HTTPS host and submit the base URL. The following endpoints must be reachable without authentication:
+
+- `https://<your-host>/widgets.json`
+- `https://<your-host>/apps.json`
+- `https://<your-host>/setup`
+
+The data endpoints can either read `X-API-Key` from OpenBB Data Connector headers or use `ADANOS_API_KEY` / `OPENBB_ADANOS_API_KEY` from the backend environment.
+
+The included Vercel configuration uses `workspace_app/` as the deployment root:
+
+```bash
+cd workspace_app
+vercel deploy
+```
+
 Run it locally from the repository root:
 
 ```bash
