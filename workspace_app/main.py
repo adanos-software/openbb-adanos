@@ -10,6 +10,7 @@ import httpx
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
+from fastapi.staticfiles import StaticFiles
 
 from openbb_adanos.utils.client import (
     API_KEY_ENV_VARS,
@@ -44,6 +45,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.mount("/static", StaticFiles(directory=APP_DIR / "static"), name="static")
 
 
 def _load_json_file(filename: str) -> Any:
