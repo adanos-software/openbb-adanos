@@ -58,6 +58,7 @@ Marketplace screenshots are hosted by the backend under `/static/openbb/`, for e
 - `/static/openbb/adanos-openbb-overview.png`
 - `/static/openbb/adanos-openbb-compare.png`
 - `/static/openbb/adanos-openbb-trending.png`
+- `/static/openbb/adanos-openbb-connection.png` (legacy marketplace URL)
 
 Run it locally from the repository root:
 
