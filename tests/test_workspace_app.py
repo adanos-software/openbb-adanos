@@ -95,7 +95,8 @@ def test_metadata_endpoints_use_openbb_shapes(monkeypatch):
     apps = client.get("/apps.json").json()
 
     assert isinstance(widgets, dict)
-    assert {"adanos_setup", "adanos_trending", "adanos_compare"} <= set(widgets)
+    assert "adanos_setup" not in widgets
+    assert {"adanos_trending", "adanos_compare"} <= set(widgets)
     for widget_id in ("adanos_trending", "adanos_stock_sentiment", "adanos_compare"):
         assert "columnsDefs" not in widgets[widget_id]
         fields = {
@@ -128,16 +129,13 @@ def test_metadata_endpoints_use_openbb_shapes(monkeypatch):
     assert apps[0]["prompts"]
 
 
-def test_missing_api_key_keeps_app_discoverable(monkeypatch):
+def test_missing_api_key_keeps_metadata_discoverable(monkeypatch):
     _clear_api_key_env(monkeypatch)
     client = TestClient(workspace_main.app)
 
-    setup = client.get("/setup")
     metrics = client.get("/market_sentiment")
     trending = client.get("/trending")
 
-    assert setup.status_code == 200
-    assert "X-API-Key" in setup.text
     assert metrics.json()[0]["value"] == "Configure"
     assert trending.status_code == 200
     assert trending.json() == []

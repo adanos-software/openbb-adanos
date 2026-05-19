@@ -1,13 +1,4 @@
 {
-  "adanos_setup": {
-    "name": "Adanos Setup",
-    "description": "How to configure the optional Adanos API key for this OpenBB Workspace backend.",
-    "category": "Adanos Market Sentiment",
-    "type": "markdown",
-    "endpoint": "setup",
-    "gridData": { "w": 40, "h": 7 },
-    "source": "Adanos"
-  },
   "adanos_market_sentiment": {
     "name": "Market Sentiment Snapshot",
     "description": "Market-level buzz and sentiment snapshot from one Adanos platform.",
