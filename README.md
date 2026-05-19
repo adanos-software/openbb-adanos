@@ -42,9 +42,8 @@ For OpenBB Marketplace review, deploy this backend to a public HTTPS host and su
 
 - `https://<your-host>/widgets.json`
 - `https://<your-host>/apps.json`
-- `https://<your-host>/setup`
 
-The data endpoints can either read `X-API-Key` from OpenBB Data Connector headers or use `ADANOS_API_KEY` / `OPENBB_ADANOS_API_KEY` from the backend environment.
+For marketplace deployments, users enter their own Adanos API key through the OpenBB listing card, and OpenBB forwards it to this backend as `X-API-Key`. The backend environment variables `ADANOS_API_KEY` / `OPENBB_ADANOS_API_KEY` remain available only as a local/private deployment fallback.
 
 The included Vercel configuration uses `workspace_app/` as the deployment root:
 

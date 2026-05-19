@@ -4,7 +4,6 @@ FastAPI backend for OpenBB Workspace widgets powered by the Adanos Market Sentim
 
 ## What It Adds
 
-- Setup markdown widget for API-key configuration.
 - Market-level sentiment metrics for Reddit, News, X/Twitter, and Polymarket.
 - Trending sentiment table with click-to-select symbol behavior.
 - Selected-symbol sentiment table.
@@ -28,9 +27,9 @@ Settings -> Data Connectors -> Add data connector
 
 ## API Key
 
-The app metadata endpoints (`/widgets.json` and `/apps.json`) are public so OpenBB can discover the app. Data endpoints use the Adanos API only when an API key is configured.
+The app metadata endpoints (`/widgets.json` and `/apps.json`) are public so OpenBB can discover the app. For marketplace deployments, users enter their own Adanos API key through the OpenBB listing card, and OpenBB forwards it to this backend as `X-API-Key`.
 
-Preferred Workspace setup:
+Local/private Workspace setup:
 
 ```text
 Header: X-API-Key
@@ -49,7 +48,6 @@ API docs: https://api.adanos.org/docs/
 
 - `GET /widgets.json`
 - `GET /apps.json`
-- `GET /setup`
 - `GET /market_sentiment?source=reddit&days=7`
 - `GET /trending?source=reddit&days=7&limit=20&asset_type=stock`
 - `GET /stock_sentiment?symbol=AAPL&source=reddit&days=7`

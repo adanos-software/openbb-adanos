@@ -8,12 +8,11 @@ Provide an OpenBB Workspace app backend for Adanos Market Sentiment API data wit
 
 - Source API: https://api.adanos.org/docs/
 - Platforms: Reddit, News, X/Twitter, Polymarket.
-- API key: optional for app discovery, required only for live data requests.
-- Credential delivery: OpenBB Data Connector header `X-API-Key` or backend env var `ADANOS_API_KEY` / `OPENBB_ADANOS_API_KEY`.
+- API key: provided per user through the OpenBB listing card or Data Connector credentials.
+- Credential delivery: OpenBB sends the user's key as the `X-API-Key` header. Backend env vars `ADANOS_API_KEY` / `OPENBB_ADANOS_API_KEY` remain only as a local/private deployment fallback.
 
 ## Widgets
 
-- `adanos_setup`: markdown setup instructions.
 - `adanos_market_sentiment`: metric snapshot for a selected source and lookback.
 - `adanos_trending`: table of trending sentiment rows with clickable symbols.
 - `adanos_stock_sentiment`: table for one selected symbol.
@@ -21,7 +20,7 @@ Provide an OpenBB Workspace app backend for Adanos Market Sentiment API data wit
 
 ## Layout
 
-- Overview tab: setup, market metrics, selected-symbol row, trending table.
+- Overview tab: market metrics, selected-symbol row, trending table.
 - Compare tab: multi-symbol comparison table.
 - Groups:
   - `Group 1`: `symbol`
